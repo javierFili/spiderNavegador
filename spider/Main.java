@@ -1,3 +1,4 @@
+//Javier Filigrana Agreda
 package spider;
 
 import spider.navegador.NavegadorWeb;
