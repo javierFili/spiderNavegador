@@ -1,4 +1,4 @@
-package spider.navegador;
+package spider.servidor;
 
 public class PedidoHTTP {
   private String metodo;  // en principio ahora solo GET
@@ -13,7 +13,9 @@ public class PedidoHTTP {
     return metodo;
   }
 
-  public String getuRL() {
+
+  //posible error.
+  public String getUrl() {
     return uRL;
   }
 }

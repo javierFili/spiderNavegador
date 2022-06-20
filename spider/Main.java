@@ -8,7 +8,7 @@ import spider.servidor.ServidorWeb;
 class Main {
   public static void main(String[] args) {
     ServidorWeb google = new ServidorWeb("www.google.com");
-    ServidorWeb fcyt = new ServidorWeb("www.fcyt.edu.bo");
+    ServidorWeb fcyt = new ServidorWeb("www.fcyt.umss.edu.bo");
     ServidorWeb csumss = new ServidorWeb("www.cs.umss.edu.bo");
     Internet internet = new Internet();
     internet.registrar(google);

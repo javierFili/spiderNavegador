@@ -1,9 +1,9 @@
 package spider.tests;
 
-import spider.navegador.PedidoHTTP;
 import org.junit.jupiter.api.Test;
+import spider.servidor.PedidoHTTP;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PedidoHTTPTest {
   PedidoHTTP pedido = new PedidoHTTP("GET", "servidores.www.google.com:index.html");
@@ -16,6 +16,6 @@ class PedidoHTTPTest {
 
   @Test
   void getPeticion() {
-    assertEquals(pedido.getuRL(), "servidores.www.google.com:index.html");
+    assertEquals(pedido.getUrl(), "servidores.www.google.com:index.html");
   }
 }

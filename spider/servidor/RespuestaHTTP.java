@@ -1,4 +1,4 @@
-package spider.navegador;
+package spider.servidor;
 
 public class RespuestaHTTP {
   private int codigoRespuesta;

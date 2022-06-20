@@ -1,8 +1,5 @@
 package spider.servidor;
 
-import spider.navegador.PedidoHTTP;
-import spider.navegador.RespuestaHTTP;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -44,8 +41,8 @@ public class ServidorWeb {
     }
   }
 
-  public RespuestaHTTP get(PedidoHTTP p) {
-    String recurso = p.getuRL();
+  public RespuestaHTTP obtenerRespuesta(PedidoHTTP p) {
+    String recurso = p.getUrl();
     recurso = obtenerRecurso(recurso);
     String siNoHubiera = obtenerRecursoHtml("errores", "404.html");
     RespuestaHTTP respuesta = new RespuestaHTTP(404, siNoHubiera);
@@ -109,5 +106,9 @@ public class ServidorWeb {
       res++;
     }
     return res;
+  }
+
+  public String getNombre() {
+    return nombre;
   }
 }

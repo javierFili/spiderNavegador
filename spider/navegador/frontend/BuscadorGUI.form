@@ -15,7 +15,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="NombreServidor;elemento"/>
+          <text value=""/>
         </properties>
       </component>
       <component id="287a" class="javax.swing.JTextArea" binding="documentoShow">
