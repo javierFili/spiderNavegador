@@ -1,21 +1,19 @@
 package spider.navegador.backend;
-
-import spider.servidor.Internet;
-import spider.servidor.PedidoHTTP;
-import spider.servidor.RespuestaHTTP;
-import spider.servidor.ServidorWeb;
-
 public class BuscadorBackend {
-  PedidoHTTP pedidoHTTP;
-  RespuestaHTTP respuestaHTTP;
-  Internet internet;
-  public BuscadorBackend(Internet internet) {
-    this.internet = internet;
-  }
-  public String busqueda(String consulta) {
-    pedidoHTTP = new PedidoHTTP("GET", consulta);
-    respuestaHTTP = internet.ejecutarPedido(pedidoHTTP);
-    consulta = respuestaHTTP.getRecurso();
-    return consulta;
+  public String obtenerCadena(String cadena) {
+    String res = "";
+    for (int i = 0; i < cadena.length(); i++) {
+      if (cadena.charAt(i) == '<') {
+        res += cadena.substring(0,i);
+        for (int j = i; j < cadena.length(); j++) {
+          if (cadena.charAt(j) == '>') {
+            cadena = cadena.substring(j + 1, cadena.length());
+            i = 0;
+            j = cadena.length() + 1;
+          }
+        }
+      }
+    }
+    return res;
   }
 }

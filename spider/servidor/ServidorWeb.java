@@ -14,6 +14,13 @@ public class ServidorWeb {
     this.nombre = nombreServidor;
   }
 
+  public void iniciar() {
+    // Inicia el servidor con un socket en el puerto 8080 para atender directamente los pedidos
+  }
+
+
+
+  //este debe tener salida de String
   public RespuestaHTTP obtenerRespuesta(PedidoHTTP p) {
     String recurso = p.getUrl();
     recurso = obtenerRecurso(recurso);
@@ -25,7 +32,6 @@ public class ServidorWeb {
       return new RespuestaHTTP(400, para400);
     }
     if (true) {
-      //String nombre = obtenerNombre(this.nombre);
       recurso = obtenerRecursoHtml(this.nombre, recurso);
       if (recurso.length() <= 1) {
         return respuesta;
@@ -40,7 +46,6 @@ public class ServidorWeb {
     BufferedReader almacenamiento;
     System.out.println("buscando el recurso:"+nombre+"y "+recurso);
     String html = "", informacionSacada = "";
-    //nombre = nombre.replace('.', '/');
     String pathName = "servidores/" + nombre + "/" + recurso;
     recursosDisponibles = new File(pathName);
     long hayContenido = recursosDisponibles.length();
@@ -94,7 +99,7 @@ public class ServidorWeb {
       "<html lang=\"en\">\n" +
       "<head>\n" +
       "    <meta charset=\"UTF-8\">\n" +
-      "    <title>Title</title>\n" +
+      "    <title>Mensaje de error.</title>\n" +
       "</head>\n" +
       "<body>\n" +
       "   <div>\n" +
@@ -106,7 +111,7 @@ public class ServidorWeb {
       "<html lang=\"en\">\n" +
       "<head>\n" +
       "    <meta charset=\"UTF-8\">\n" +
-      "    <title>Title</title>\n" +
+      "    <title>Mensaje de error.</title>\n" +
       "</head>\n" +
       "<body>\n" +
       "    404 - Not found\n" +

@@ -55,7 +55,7 @@ class InternetTest {
   }
 */
 
-  @Test
+ /* @Test
   void ejecutarPedidoValido() {
     ServidorWeb google = new ServidorWeb("www.google.com");
     ServidorWeb fcyt = new ServidorWeb("www.fcyt.umss.edu.bo");
@@ -86,5 +86,19 @@ class InternetTest {
     System.out.println(respuesta.getRecurso());
     assertEquals(codRespuesta, 404);
   }
+*/
 
+  @Test
+  void ejecutarPedidoValido() {
+    ServidorWeb google = new ServidorWeb("www.google.com");
+    ServidorWeb fcyt = new ServidorWeb("www.fcyt.umss.edu.bo");
+    ServidorWeb csumss = new ServidorWeb("www.cs.umss.edu.bo");
+    Internet internet = new Internet();
+    internet.registrar(google);
+    internet.registrar(fcyt);
+    internet.registrar(csumss);
+    String res = internet.ejecutarPedido("GET;www.fcyt.umss.edu.bo;index.html");
+    System.out.println(res);
+
+  }
 }
