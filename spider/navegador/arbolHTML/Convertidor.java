@@ -1,7 +1,4 @@
-package spider.navegador;
-
-import spider.navegador.arbolesNarios.ArbolNArio;
-import spider.navegador.arbolesNarios.Nodo;
+package spider.navegador.arbolHTML;
 
 import java.util.ArrayList;
 
@@ -94,5 +91,9 @@ public class Convertidor {
     }
     this.cadena = cadena;
     return contenido;
+  }
+
+  public ArbolNArio getArbol(){
+    return  arbol;
   }
 }

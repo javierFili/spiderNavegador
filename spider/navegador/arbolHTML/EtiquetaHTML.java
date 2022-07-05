@@ -1,4 +1,6 @@
-package spider.navegador.backend;
+package spider.navegador.arbolHTML;
+
+import spider.navegador.arbolHTML.EtiquetaEnum;
 
 public interface EtiquetaHTML {
   public EtiquetaEnum getTipoEtiquetaHTML();

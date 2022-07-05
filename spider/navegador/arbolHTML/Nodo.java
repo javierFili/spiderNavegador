@@ -1,4 +1,4 @@
-package spider.navegador.arbolesNarios;
+package spider.navegador.arbolHTML;
 
 import java.util.ArrayList;
 import java.util.List;

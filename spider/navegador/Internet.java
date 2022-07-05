@@ -29,6 +29,7 @@ public class Internet {
         while (informacionSacada != null) {
           informacionSacada = almacenamiento.readLine();
           if (informacionSacada != null) {
+            dnsParaAgregar = informacionSacada;
             dns.add(dnsParaAgregar);
           }
         }
@@ -42,20 +43,24 @@ public class Internet {
 
   public void registrar(String nombre, String ip) {
     // debe verificar que el nombre no esté registrado
+    String paGuardar = nombre + ";" + ip;
+    if (!dns.contains(paGuardar)) {
+      dns.add(paGuardar);
+    }
   }
 
   public String resolverNombre(String nombre) {
-    // busca en el registro de nombres y devuelve la ip correspondiente
-    return "";
+    String serviNombre = "";
+    for (int i = 0; i < dns.size(); i++) {
+      serviNombre = (String) dns.get(i);
+      int pos = serviNombre.indexOf(';');
+      String servi = serviNombre.substring(0, pos);
+      if (servi.equals(nombre)) {
+        int posDos = serviNombre.indexOf(';');
+        String ip = serviNombre.substring(posDos + 1, serviNombre.length());
+        return ip;
+      }
+    }
+    return null;
   }
-
-/*
-  Archivo dns.txt tiene el siguiente formato
-      nombre;ip
-  www.google.com;25.80.61.85
-  www.fcyt.umss.edu.bo;25.80.137.142
-  www.cs.umss.edu.bo;25.82.184.206
-*/
-
-
 }

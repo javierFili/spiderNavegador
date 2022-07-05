@@ -1,9 +1,5 @@
 package spider.servidor;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,8 +71,8 @@ public class Internet {
             "</html>";
       }
       if (metodo.equals("GET")) {
-        RespuestaHTTP res = server.obtenerRespuesta(new PedidoHTTP("GET", recurso));
-        return res.getCodigoRespuesta() + ";" + res.getRecurso();
+        String res = server.obtenerRespuesta(recurso);
+        return res;
       }
     } catch (Exception e) {
       return 400 + ";<!DOCTYPE html>\n" +
@@ -95,31 +91,5 @@ public class Internet {
     return null;
   }
 
-  public void run() {
-    try {
-      ServerSocket skServidor = new ServerSocket(PUERTO);
-      System.out.println("Escucho el puerto " + PUERTO);
-      int n = 1;
-      while (n > 0) {
-        n--;
-        Socket skCliente = skServidor.accept();
-        DataInputStream in = new DataInputStream(skCliente.getInputStream());
-        DataOutputStream out = new DataOutputStream(skCliente.getOutputStream());
-        String mesajeIn = "";
-        String mesajeOut = "";
-        int a = 0;
-        while (a < 5) {
-          System.out.println("Consulta numero" + a);
-          mesajeIn = in.readUTF();
-          mesajeOut = ejecutarPedido(mesajeIn);
-          out.writeUTF(mesajeOut);
-          a++;
-        }
-        skCliente.close();
-      }
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-  }
 }
 
