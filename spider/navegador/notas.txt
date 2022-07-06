@@ -1,7 +1,5 @@
---> conectar el socket y que haya las direcciones
-ip mas los dns..
+--> posible problema en el registrar.metodo de intenet.
 
---> ver la forma en la que el boton va hacer coorrer al
-pedido y enviarlo.
+-->
 
 -->

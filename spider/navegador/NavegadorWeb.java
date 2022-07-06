@@ -3,7 +3,6 @@ package spider.navegador;
 import spider.navegador.backend.CreadorComposite;
 import spider.navegador.arbolHTML.EtiquetaHTML;
 import spider.navegador.frontend.BuscadorGUI;
-
 import javax.swing.*;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
