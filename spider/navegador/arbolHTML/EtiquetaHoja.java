@@ -1,5 +1,7 @@
 package spider.navegador.arbolHTML;
 
+import javax.swing.*;
+
 public class EtiquetaHoja implements EtiquetaHTML {
   private EtiquetaEnum tipo;
   private String contenido;
@@ -15,7 +17,13 @@ public class EtiquetaHoja implements EtiquetaHTML {
   }
 
   @Override
-  public Tipo metodo() {
+  public JComponent graficar() {
     return null;
   }
+
+  @Override
+  public String desplegar() {
+    return null;
+  }
+
 }

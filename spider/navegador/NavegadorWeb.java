@@ -34,7 +34,8 @@ public class NavegadorWeb {
          }
         );
   }
-//preguntar a que se refiere con la exepcion de ServerNameNotFound.
+  //preguntar a que se refiere con la exepcion de ServerNameNotFound.
+  //llama al frontend y al backend
   public String ejecutarPedido(String pedido) {
     //GET;servidor;recurso
     String servidor = "";

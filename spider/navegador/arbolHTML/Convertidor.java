@@ -12,15 +12,6 @@ public class Convertidor {
     arbol = new ArbolNArio(nodoRaiz);
   }
 
-  public String rearmarCadena() {
-    ArrayList<Nodo> nodos = arbol.getPostOrder();
-    String res = "";
-    for (int i = 0; i < nodos.size(); i++) {
-      res += nodos.get(i).getContenido();
-    }
-    return res;
-  }
-
   public void generarArbol(String cadena) {
     this.cadena = cadena;
     generarArbol(cadena, nodoRaiz);

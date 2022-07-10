@@ -1,10 +1,11 @@
 package spider.navegador.arbolHTML;
 
-public interface EtiquetaHTML {
-  public Tipo metodo();
+import javax.swing.*;
 
-  // Devuelve el tipo de la etiqueta
-  String toString(); // Para mostrar el contenido del
-  // componente la etiqueta original
+public interface EtiquetaHTML {
+  public String toString();     // Para mostrar el contenido del
+  // componente en texto plano
+  public JComponent graficar(); // Para desplegar la GUI
+  public String desplegar();    // Para desplegar la consola
 
 }

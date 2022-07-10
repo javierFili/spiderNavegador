@@ -1,33 +1,30 @@
 package spider.navegador.arbolHTML;
 
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class EtiquetaRama implements EtiquetaHTML {
-
   private EtiquetaEnum tipo;
-  private String contenido;
+  private List<EtiquetaHTML> hijos;
 
-  public EtiquetaRama(EtiquetaEnum tipo, String contenido) {
+  public EtiquetaRama(EtiquetaEnum etiqueta) {
     super();
-    this.tipo = tipo;
-    this.contenido = contenido;
-    generarArbol();
-  }
-
-  private void generarArbol() {
-    Convertidor con = new Convertidor();
-    con.generarArbol(contenido);
-    ArbolNArio ar = con.getArbol();
-  }
-
-  public String toString() {
-    return contenido;
-  }
-
-  public void insertarHijo(EtiquetaHTML hijo) {
-
+    this.tipo = etiqueta;
+    hijos = new ArrayList<>();
   }
 
   @Override
-  public Tipo metodo() {
+  public JComponent graficar() {
     return null;
+  }
+
+  @Override
+  public String desplegar() {
+    return null;
+  }
+
+  public void insertarHijo(EtiquetaHTML hijo) {
+    hijos.add(hijo);
   }
 }
