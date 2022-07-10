@@ -9,26 +9,6 @@ public class ArbolNArio<T> {
     this.raiz = raiz;
   }
 
-  public boolean vacio() {
-    return raiz == null;
-  }
-
-  public Nodo<T> getRaiz() {
-    return raiz;
-  }
-
-  public void setRaiz(Nodo<T> raiz) {
-    this.raiz = raiz;
-  }
-
-  public boolean existe(T clave) {
-    return encontrar(raiz, clave);
-  }
-
-  public int getNumeroNodos() {
-    return getNumeroDescendientes(raiz) + 1;
-  }
-
   public int getNumeroDescendientes(Nodo<T> nodo) {
     int n = nodo.getHijos().size();
     for (Nodo<T> hijo : nodo.getHijos()) n += getNumeroDescendientes(hijo);
@@ -42,16 +22,6 @@ public class ArbolNArio<T> {
       for (Nodo<T> hijo : nodo.getHijos()) if (encontrar(hijo, nodoClave)) res = true;
     }
     return res;
-  }
-
-  private Nodo<T> encontrarNodo(Nodo<T> nodo, T nodoClave) {
-    if (nodo == null) return null;
-    if (nodo.getDato().equals(nodoClave)) return nodo;
-    else {
-      Nodo<T> cnodo = null;
-      for (Nodo<T> hijo : nodo.getHijos()) if ((cnodo = encontrarNodo(hijo, nodoClave)) != null) return cnodo;
-    }
-    return null;
   }
 
   public ArrayList<Nodo<T>> getPreOrder() {
@@ -78,22 +48,6 @@ public class ArbolNArio<T> {
       construirPostOrder(hijo, postOrder);
     }
     postOrder.add(nodo);
-  }
-
-  public ArrayList<Nodo<T>> caminoMasLargo() {
-    ArrayList<Nodo<T>> camino = null;
-    int max = 0;
-    for (ArrayList<Nodo<T>> ruta : getRamas()) {
-      if (ruta.size() > max) {
-        max = ruta.size();
-        camino = ruta;
-      }
-    }
-    return camino;
-  }
-
-  public int getCaminoMasLargo() {
-    return caminoMasLargo().size();
   }
 
   public ArrayList<ArrayList<Nodo<T>>> getRamas() {

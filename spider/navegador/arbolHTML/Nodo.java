@@ -29,39 +29,8 @@ public class Nodo<T> {
     hijos.add(hijo);
   }
 
-  public void agregarHijoEn(int posicion, Nodo<T> hijo) {
-    hijo.setPadre(this);
-    this.hijos.add(posicion, hijo);
-  }
-
-  public void setHijos(List<Nodo<T>> hijos) {
-    for (Nodo<T> hijo : hijos) hijo.setPadre(this);
-    this.hijos = hijos;
-  }
-
-  public void eliminarHijos() {
-    this.hijos.clear();
-  }
-
-  public Nodo<T> eliminarHijoEn(int posicion) {
-    return hijos.remove(posicion);
-  }
-
-  public void eliminarHijo(Nodo<T> hijoABorrar) {
-    List<Nodo<T>> list = getHijos();
-    list.remove(hijoABorrar);
-  }
-
   public T getDato() {
     return this.dato;
-  }
-
-  public void setDato(T dato) {
-    this.dato = dato;
-  }
-
-  public Nodo<T> getPadre() {
-    return this.padre;
   }
 
   public void setPadre(Nodo<T> padre) {
@@ -70,10 +39,6 @@ public class Nodo<T> {
 
   public List<Nodo<T>> getHijos() {
     return this.hijos;
-  }
-
-  public Nodo<T> getHijoEn(int posicion) {
-    return hijos.get(posicion);
   }
 
   @Override

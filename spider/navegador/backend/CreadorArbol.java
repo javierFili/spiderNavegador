@@ -4,10 +4,13 @@ import spider.navegador.arbolHTML.*;
 
 import java.util.ArrayList;
 
-public class CreadorComposite {
+public class CreadorArbol {
+
+  //ojo no debes importar el arbol ni el nodo, ni convertidor..
+  //cuidado, solo se pueden importar y usar EtiquetaHTML, Rama,Hoja
   public EtiquetaHTML crearDOM(String mensajeIn) {
     Convertidor con = new Convertidor();
-    EtiquetaComposite eti = new EtiquetaComposite(EtiquetaEnum.title, "");
+    EtiquetaRama eti = new EtiquetaRama(EtiquetaEnum.title, "");
     String contenido = "";
     con.generarArbol(mensajeIn);
     ArbolNArio a = con.getArbol();
@@ -17,9 +20,9 @@ public class CreadorComposite {
       contenido += list.get(i).getContenido();
       try {
         EtiquetaEnum tipoDeEti = EtiquetaEnum.valueOf(tipo);
-        eti = new EtiquetaComposite(tipoDeEti, contenido);
+        eti = new EtiquetaRama(tipoDeEti, contenido);
       } catch (Exception e) {
-
+        System.out.println("existe una etiqueta no permitida");
       }
     }
     return eti;

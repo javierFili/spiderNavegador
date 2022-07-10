@@ -1,10 +1,10 @@
 package spider.navegador.arbolHTML;
 
-public class EtiquetaHojaFinal implements EtiquetaHTML {
+public class EtiquetaHoja implements EtiquetaHTML {
   private EtiquetaEnum tipo;
   private String contenido;
 
-  public EtiquetaHojaFinal(EtiquetaEnum tipo, String contenido) {
+  public EtiquetaHoja(EtiquetaEnum tipo, String contenido) {
     super();
     this.tipo = tipo;
     this.contenido = contenido;
@@ -15,7 +15,7 @@ public class EtiquetaHojaFinal implements EtiquetaHTML {
   }
 
   @Override
-  public EtiquetaEnum getTipoEtiquetaHTML() {
+  public Tipo metodo() {
     return null;
   }
 }

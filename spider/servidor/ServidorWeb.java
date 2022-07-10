@@ -9,23 +9,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ServidorWeb {
-  private ArrayList<String> recursos = new ArrayList<>();
   private List<ServidorWeb> servidores;
   private File recursosDisponibles = new File("RecursosDisponibles.txt");
   private String nombre;
+  private static final int PUERTO = 8080;
 
   public ServidorWeb(String nombreServidor) {
     servidores = new ArrayList<>();
     this.nombre = nombreServidor;
   }
 
-  private static final int PUERTO = 8080;
-
   public void iniciar() {
     try {
       ServerSocket skServidor = new ServerSocket(PUERTO);
       System.out.println("Escucho el puerto " + PUERTO);
-      int n = 1;
+      int n = 5;
       while (n > 0) {
         n--;
         Socket skCliente = skServidor.accept();
@@ -33,14 +31,9 @@ public class ServidorWeb {
         DataOutputStream out = new DataOutputStream(skCliente.getOutputStream());
         String mesajeIn = "";
         String mesajeOut = "";
-        int a = 0;
-        while (a < 5) {
-          System.out.println("Consulta numero" + a);
-          mesajeIn = in.readUTF();
-          mesajeOut = ejecutarPedido(mesajeIn);
-          out.writeUTF(mesajeOut);
-          a++;
-        }
+        mesajeIn = in.readUTF();
+        mesajeOut = ejecutarPedido(mesajeIn);
+        out.writeUTF(mesajeOut);
         skCliente.close();
       }
     } catch (Exception e) {
@@ -48,11 +41,8 @@ public class ServidorWeb {
     }
   }
 
-
-  //este debe tener salida de String
-  public String obtenerRespuesta(String p) {
+  private String obtenerRespuesta(String p) {
     String recurso = p;
-    recurso = obtenerRecurso(recurso);
     String respuesta = "404;" + para404;
     Pattern pattern = Pattern.compile("^[a-zA-Z.]*");
     Matcher matcher = pattern.matcher(recurso);
@@ -73,7 +63,7 @@ public class ServidorWeb {
   private String obtenerRecursoHtml(String nombre, String recurso) {
     FileReader leer;
     BufferedReader almacenamiento;
-    System.out.println("buscando el recurso:" + nombre + "y " + recurso);
+    System.out.println("buscando el recurso:" + nombre + " y " + recurso);
     String html = "", informacionSacada = "";
     String pathName = "servidores/" + nombre + "/" + recurso;
     recursosDisponibles = new File(pathName);
@@ -96,94 +86,19 @@ public class ServidorWeb {
     return html;
   }
 
-  private String obtenerRecurso(String recurso) {
-    int i = obtenerPosChar(recurso, ';', 0);
-    if (i == -1) {
-      return "2111";
-    }
-    recurso = recurso.substring(i + 1, recurso.length());
-    return recurso;
-  }
-
-  private int obtenerPosChar(String cadena, char subCad, int ini) {
-    int res = ini;
-    int ress = 0;
-    while (res < cadena.length()) {
-      if (cadena.charAt(res) == subCad) {
-        ress = res;
-        break;
-      } else {
-        ress = -1;
-      }
-      res++;
-    }
-    return ress;
-  }
-
-  public void registrar(ServidorWeb servidorWeb) {
-    if (!servidores.contains(servidorWeb)) {
-      servidores.add(servidorWeb);
-    }
-  }
-
-  private ServidorWeb obtenerServidor(String nombreServidor) {
-    ServidorWeb servidor = null;
-    for (int i = 0; i < servidores.size(); i++) {
-      if (servidores.get(i).getNombre().equals(nombreServidor)) {
-        servidor = servidores.get(i);
-      }
-    }
-    return servidor;
-  }
-
-  private int obtenerPosicionDeCaracter(String cadena, char caracter, int n) {
-    int res = 0;
-    int a = n;
-    while (res < cadena.length()) {
-      if (cadena.charAt(res) == caracter) {
-        if (n == 0) {
-          break;
-        }
-        n--;
-      }
-
-      res++;
-    }
-    return res;
-  }
-
   public String ejecutarPedido(String pedido) {
     int i = 0;
     int j = 0;
+    String recurso = "";
+    String metodo = "";
     try {
-      j = obtenerPosicionDeCaracter(pedido, ';', 0);
-      String metodo = pedido.substring(0, j);
-
-      i = obtenerPosicionDeCaracter(pedido, ';', 0);
-      j = obtenerPosicionDeCaracter(pedido, ';', 1);
-      String servidor = pedido.substring(i + 1, j);
-
-      i = obtenerPosicionDeCaracter(pedido, ';', 1);
-      j = pedido.length();
-      String recurso = pedido.substring(i, j);
-      ServidorWeb server = obtenerServidor(servidor);
+      i = pedido.indexOf(';');
+      metodo = pedido.substring(0, i);
+      recurso = pedido.substring(i + 1, pedido.length());
       if (metodo.equals("GET")) {
         String res = obtenerRespuesta(recurso);
         return res;
       }
-      if (server == null) {
-        return 500 + ";\n" +
-            "<html>\n" +
-            "<head>\n" +
-            "    <meta charset=\"UTF-8\">\n" +
-            "    <title>Mensaje de error.</title>\n" +
-            "</head>\n" +
-            "<body>\n" +
-            "    500 - Server error\n" +
-            "</body>\n" +
-            "</html>";
-      }
-
     } catch (Exception e) {
       return 400 + ";\n" +
           "<html>\n" +
@@ -199,10 +114,6 @@ public class ServidorWeb {
 
     //aun no procesamos "POST","PUT";
     return null;
-  }
-
-  public String getNombre() {
-    return nombre;
   }
 
   private String para400 = "\n" +

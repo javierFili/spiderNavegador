@@ -40,15 +40,6 @@ public class Internet {
     }
   }
 
-
-  public void registrar(String nombre, String ip) {
-    // debe verificar que el nombre no esté registrado
-    String paGuardar = nombre + ";" + ip;
-    if (!dns.contains(paGuardar)) {
-      dns.add(paGuardar);
-    }
-  }
-
   public String resolverNombre(String nombre) {
     String serviNombre = "";
     for (int i = 0; i < dns.size(); i++) {

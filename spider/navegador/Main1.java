@@ -1,7 +1,6 @@
 package spider.navegador;
 
-import spider.navegador.arbolHTML.Convertidor;
-import spider.navegador.backend.CreadorComposite;
+import spider.navegador.backend.CreadorArbol;
 import spider.navegador.arbolHTML.EtiquetaHTML;
 
 public class Main1 {
@@ -19,7 +18,7 @@ public class Main1 {
         "</div>\n" +
         "</body>\n" +
         "</html>";
-    CreadorComposite compo = new CreadorComposite();
+    CreadorArbol compo = new CreadorArbol();
     EtiquetaHTML et = compo.crearDOM(cadena);
     System.out.println(et.toString());
   }
