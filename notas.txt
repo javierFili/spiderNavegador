@@ -1,7 +1,0 @@
-2:Generar el server-error
-    - Ingresar "www.fct.umss.edu.bo;". El resultado deberá ser 500 - Server error
-    Indica que el servidor no existe o no es encontrado. Hay otras situaciones en las
-     que se devuelve el código 500,
-     pero no están todavía especificadas en este documento de requerimientos.
-     Se mostrará un mensaje que contiene el código y el mensaje de error en formato HTML.
-

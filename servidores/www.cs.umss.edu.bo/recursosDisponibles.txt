@@ -1,4 +1,0 @@
-index.html
-materiasInformatica.html
-materiasSistemas.html
-materias.html

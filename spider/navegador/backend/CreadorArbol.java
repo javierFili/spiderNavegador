@@ -74,7 +74,6 @@ public class CreadorArbol {
           if (cadena.charAt(j) == '>') {
             try {
               String padreDe = cadena.substring(i + 2, j);
-              //System.out.println(tipo.name() + "Pabre de :" + padreDe);
               if (tipo.name().equals(padreDe)) {
                 i = cadena.length();
                 cadena = cadena.substring(j + 1, cadena.length());
@@ -87,6 +86,7 @@ public class CreadorArbol {
         }
       } else {
         if (cadena.charAt(i) == '<' && cadena.charAt(i + 1) != '/') {
+          i = 0;
           generarArbol(nodoPadre1);
         }
       }

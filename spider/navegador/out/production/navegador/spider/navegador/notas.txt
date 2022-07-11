@@ -4,4 +4,4 @@
     --> Por ahora sabemos que el JCompent es una interfaz, entonces eso podremos usar para mandar.
 --> Obtener todo el texto para que se imprima o renderize por consola.
     --> Vamos a obtener del arbol de html, para que el texto este en uno.
--->
+--> Arreglar las etiquetas html de todos tus docs htmls.

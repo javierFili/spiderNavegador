@@ -27,7 +27,7 @@ public class NavegadorWeb {
            @Override
            public void run() {
              JFrame frame = new BuscadorGUI(nav);
-             frame.setSize(500, 550);
+             frame.setSize(500, 650);
              frame.setVisible(true);
              frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
            }

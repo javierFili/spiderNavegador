@@ -41,12 +41,12 @@ public class ServidorWeb {
 
   private String obtenerRespuesta(String p) {
     String recurso = p;
-    String respuesta = "404;" + para404;
-    Pattern pattern = Pattern.compile("^[a-zA-Z.]*");
+    String respuesta = para404;
+    Pattern pattern = Pattern.compile("^[1-9-a-zA-Z.]*");
     Matcher matcher = pattern.matcher(recurso);
     boolean b = matcher.matches();
     if (!b) {
-      return "400;" + para400;
+      return para400;
     }
     recurso = obtenerRecursoHtml(this.nombre, recurso);
     if (recurso.length() <= 1) {
@@ -95,42 +95,23 @@ public class ServidorWeb {
         return res;
       }
     } catch (Exception e) {
-      return 400 + ";\n" +
-          "<html>\n" +
-          "<head>\n" +
-          "    <meta charset=\"UTF-8\">\n" +
-          "    <title>Mensaje de error.</title>\n" +
-          "</head>\n" +
-          "<body>\n" +
-          "    400 - Bad-request\n" +
-          "</body>\n" +
-          "</html>";
+      return para400;
     }
 
     //aun no procesamos "POST","PUT";
     return null;
   }
 
-  private String para400 = "\n" +
+  private String para400 = 400 + ";\n" +
       "<html>\n" +
-      "<head>\n" +
-      "    <meta charset=\"UTF-8\">\n" +
-      "    <title>Mensaje de error.</title>\n" +
-      "</head>\n" +
       "<body>\n" +
-      "   <div>\n" +
-      "       400 - Bad request\n" +
-      "   </div>\n" +
+      "    <p>400 - Bad-request</p>\n" +
       "</body>\n" +
       "</html>";
-  private String para404 = "" +
+  private String para404 = 404 +
       "<html>\n" +
-      "<head>\n" +
-      "    <meta charset=\"UTF-8\">\n" +
-      "    <title>Mensaje de error.</title>\n" +
-      "</head>\n" +
       "<body>\n" +
-      "    404 - Not found\n" +
+      "   <p> 404 - Not found</p>\n" +
       "</body>\n" +
       "</html>";
 

@@ -7,8 +7,8 @@ import java.util.List;
 public class EtiquetaRama implements EtiquetaHTML {
   private EtiquetaEnum tipo;
   private List<EtiquetaHTML> hijos;
-  private List<EtiquetaHoja> hojas;
-
+  private List<JLabel> hojas;
+  private String texto = "";
 
   public EtiquetaRama(EtiquetaEnum etiqueta) {
     super();
@@ -20,59 +20,36 @@ public class EtiquetaRama implements EtiquetaHTML {
   @Override
   public JComponent graficar() {
     JLabel label = new JLabel();
-    label.setText("");
+    String cadenaTexto = toString();
+    label.setText(cadenaTexto);
     return label;
   }
 
+
   @Override
   public String desplegar() {
-    return obtenetTextos();
+    return obtenerTextos();
   }
 
   public void insertarHijo(EtiquetaHTML hijo) {
     hijos.add(hijo);
   }
 
-  private String obtenetTextos() {
-    ArrayList<EtiquetaHoja> hojas = soloHojas((ArrayList<EtiquetaHTML>) this.hijos);
-    String cadena = "";
-    for (int i = 0; i < hojas.size(); i++) {
-      cadena += hojas.get(i).toString();
-    }
-    return cadena;
-  }
-
-  private ArrayList<EtiquetaHoja> soloHojas(ArrayList<EtiquetaHTML> hijos) {
+  private String obtenerTextos() {
+    String contenido = "";
     for (int i = 0; i < hijos.size(); i++) {
       if (hijos.get(i) instanceof EtiquetaHoja) {
-        obtenerCadena(hijos.get(i).toString());
+        contenido += "\n" + hijos.get(i).toString();
       } else {
-
+        contenido += "\n    " + hijos.get(i).toString();
       }
     }
-    return null;
+    return contenido;
   }
 
-  private ArrayList<EtiquetaHTML> darHijos() {
-    return (ArrayList<EtiquetaHTML>) hijos;
+  @Override
+  public String toString() {
+    String contenido = obtenerTextos();
+    return contenido;
   }
-
-  public String obtenerCadena(String cadena) {
-    String res = "";
-    for (int i = 0; i < cadena.length(); i++) {
-      if (cadena.charAt(i) == '<') {
-        res += cadena.substring(0, i);
-        for (int j = i; j < cadena.length(); j++) {
-          if (cadena.charAt(j) == '>') {
-            cadena = cadena.substring(j + 1, cadena.length());
-            i = 0;
-            j = cadena.length() + 1;
-          }
-        }
-      }
-    }
-    System.out.println(res);
-    return res;
-  }
-
 }
