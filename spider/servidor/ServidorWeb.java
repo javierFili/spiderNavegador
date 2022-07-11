@@ -3,19 +3,15 @@ package spider.servidor;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ServidorWeb {
-  private List<ServidorWeb> servidores;
-  private File recursosDisponibles = new File("RecursosDisponibles.txt");
+  private File recursosDisponibles;
   private String nombre;
   private static final int PUERTO = 8080;
 
   public ServidorWeb(String nombreServidor) {
-    servidores = new ArrayList<>();
     this.nombre = nombreServidor;
   }
 
@@ -97,22 +93,19 @@ public class ServidorWeb {
     } catch (Exception e) {
       return para400;
     }
-
-    //aun no procesamos "POST","PUT";
     return null;
   }
 
-  private String para400 = 400 + ";\n" +
-      "<html>\n" +
-      "<body>\n" +
-      "    <p>400 - Bad-request</p>\n" +
-      "</body>\n" +
-      "</html>";
+  private String para400 = 400 + ";" +
+      "<HTML>\n" +
+      "<BODY>\n" +
+      "<P>400 - Bad-request</P>\n" +
+      "</BODY>\n" +
+      "</HTML>";
   private String para404 = 404 +
-      "<html>\n" +
-      "<body>\n" +
-      "   <p> 404 - Not found</p>\n" +
-      "</body>\n" +
-      "</html>";
-
+      ";<HTML>\n" +
+      "<BODY>\n" +
+      "<P> 404 - Not found</P>\n" +
+      "</BODY>\n" +
+      "</HTML>";
 }

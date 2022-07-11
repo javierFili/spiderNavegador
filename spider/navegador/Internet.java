@@ -40,7 +40,7 @@ public class Internet {
     }
   }
 
-  public String resolverNombre(String nombre) {
+  public String resolverNombre(String nombre) throws ServerNameNotFound {
     String serviNombre = "";
     for (int i = 0; i < dns.size(); i++) {
       serviNombre = (String) dns.get(i);
@@ -52,6 +52,6 @@ public class Internet {
         return ip;
       }
     }
-    return null;
+    throw new ServerNameNotFound();
   }
 }

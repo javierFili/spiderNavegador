@@ -1,8 +1,7 @@
 package spider.navegador.frontend;
 
 import spider.navegador.Internet;
-import spider.navegador.backend.CreadorArbol;
-import spider.navegador.arbolHTML.EtiquetaHTML;
+import spider.navegador.ServerNameNotFound;
 
 import javax.swing.*;
 import java.io.DataInputStream;
@@ -34,10 +33,8 @@ public class NavegadorWeb {
          }
         );
   }
-  //preguntar a que se refiere con la exepcion de ServerNameNotFound.
-  //llama al frontend y al backend
+
   public String ejecutarPedido(String pedido) {
-    //GET;servidor;recurso
     String servidor = "";
     String HOST = "";
     String recurso = "";
@@ -49,10 +46,9 @@ public class NavegadorWeb {
       recurso = servidor.substring(j + 1, servidor.length());
       servidor = servidor.substring(0, j);
       HOST = parSear(servidor);
-      if (HOST == null) {
-        return servidorNoExiste();
-      }
     } catch (Exception e) {
+      return servidorNoExiste();
+    } catch (ServerNameNotFound e) {
       return servidorNoExiste();
     }
     int PUERTO = 8080;
@@ -72,24 +68,17 @@ public class NavegadorWeb {
   }
 
   private String servidorNoExiste() {
-    String salida = "<!DOCTYPE html>\n" +
-        "<html>\n" +
-        "<head>\n" +
-        "    <meta>\n" +
-        "    <title>Mensaje de error.</title>\n" +
-        "</head>\n" +
-        "<body>\n" +
-        "    500 - Server error\n" +
-        "</body>\n" +
-        "</html>";
-    CreadorArbol creador = new CreadorArbol();
-    EtiquetaHTML etiquetaHTML = creador.crearDOM(salida);
-    return etiquetaHTML.toString();
+    String salida = "<HTML>\n" +
+        "<BODY>\n" +
+        "<P>500 - Server error</P>\n" +
+        "</BODY>\n" +
+        "</HTML>";
+    return salida;
   }
 
-  private String parSear(String url) {
+  private String parSear(String url) throws ServerNameNotFound {
     String nombre = internet.resolverNombre(url);
-    return nombre;//es un tipo 198.127.1.0..algo asi o localhost.
+    return nombre;
   }
 
 }

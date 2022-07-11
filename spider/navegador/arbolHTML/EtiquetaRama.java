@@ -21,14 +21,14 @@ public class EtiquetaRama implements EtiquetaHTML {
   public JComponent graficar() {
     JLabel label = new JLabel();
     String cadenaTexto = toString();
-    label.setText(cadenaTexto);
+    label.setToolTipText(cadenaTexto);
     return label;
   }
 
 
   @Override
   public String desplegar() {
-    return obtenerTextos();
+    return toString();
   }
 
   public void insertarHijo(EtiquetaHTML hijo) {

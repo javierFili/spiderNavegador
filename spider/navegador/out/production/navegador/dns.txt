@@ -1,5 +1,4 @@
 www.google.com;localhost
 www.fcyt.umss.edu.bo;localhost
 www.cs.umss.edu.bo;25.69.163.100
-www.javierfiligrana.as;localhost
-www.mauriciohuayta.as;25.69.163.100
+www.javierfiligrana.com.bo;localhost

@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BuscadorGUI extends JFrame {
-  private JLabel documentoShow;
+  private JTextArea documentoShow;
   private JTextField datosDeEntrada;
   private JButton botonDeBuscador;
 
@@ -40,41 +40,44 @@ public class BuscadorGUI extends JFrame {
         respuesta = respuesta.substring(poss + 1, respuesta.length());
         EtiquetaHTML etiquetaHTML = creador.crearDOM(respuesta);
         JComponent con = etiquetaHTML.graficar();
-        documentoShow.setText(con.getToolTipText());
+        String cad = con.getToolTipText();
+        documentoShow.setText(cad);
       }
     });
 
     contenido1Button.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        String entrada = "GET;www.javierfiligrana.com.bo;contenido1.html";
+        String entrada = "GET;www.javierfiligrana.as;contenido1.html";
         String respuesta = nav.ejecutarPedido(entrada);
         CreadorArbol creador = new CreadorArbol();
         int poss = respuesta.indexOf(';');
         respuesta = respuesta.substring(poss + 1, respuesta.length());
         EtiquetaHTML etiquetaHTML = creador.crearDOM(respuesta);
         JComponent con = etiquetaHTML.graficar();
-        documentoShow.setText(con.getToolTipText());
+        String cad = con.getToolTipText();
+        documentoShow.setText(cad);
       }
     });
 
     contenido2Button.addActionListener(new ActionListener() {
       @Override
       public void actionPerformed(ActionEvent e) {
-        String entrada = "GET;www.javierfiligrana.com.bo;contenido2.html";
+        String entrada = "GET;www.javierfiligrana.as;contenido2.html";
         String respuesta = nav.ejecutarPedido(entrada);
         CreadorArbol creador = new CreadorArbol();
         int poss = respuesta.indexOf(';');
         respuesta = respuesta.substring(poss + 1, respuesta.length());
         EtiquetaHTML etiquetaHTML = creador.crearDOM(respuesta);
         JComponent con = etiquetaHTML.graficar();
-        documentoShow.setText(con.getToolTipText());
+        String cad = con.getToolTipText();
+        documentoShow.setText(cad);
       }
     });
   }
 
   private void crearBotones() {
-    if (datosDeEntrada.getText().equals("www.javierfiligrana.com.bo;index.html")) {
+    if (datosDeEntrada.getText().contains("index.html")) {
       contenido1Button.setVisible(true);
       contenido2Button.setVisible(true);
     } else {
@@ -82,21 +85,4 @@ public class BuscadorGUI extends JFrame {
       contenido2Button.setVisible(false);
     }
   }
-  /*private String obtenerCadena(String cadena) {
-    String res = "";
-    for (int i = 0; i < cadena.length(); i++) {
-      if (cadena.charAt(i) == '<') {
-        res += cadena.substring(0, i);
-        for (int j = i; j < cadena.length(); j++) {
-          if (cadena.charAt(j) == '>') {
-            cadena = cadena.substring(j + 1, cadena.length());
-            i = 0;
-            j = cadena.length() + 1;
-          }
-        }
-      }
-    }
-    System.out.println(res);
-    return res;
-  }*/
 }

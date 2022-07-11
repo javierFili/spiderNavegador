@@ -12,6 +12,7 @@ public class CreadorArbol {
 
   public EtiquetaHTML crearDOM(String mensajeIn) {
     this.cadena = mensajeIn;
+    cadena = cadena.replaceAll("\\t", "");
     generarArbol(cadena);
     return raiz;
   }
@@ -25,8 +26,11 @@ public class CreadorArbol {
     for (int i = 0; i < this.cadena.length(); i++) {
       if (this.cadena.charAt(i) == '<') {
         for (int j = 0; j < this.cadena.length(); j++) {
-          if (this.cadena.charAt(j) == '>') {
+          if (this.cadena.charAt(j) == '>' || this.cadena.charAt(j) == ' ') {
             String padre = this.cadena.substring(i + 1, j);
+            if (this.cadena.charAt(j) == ' ') {
+              j += 2;
+            }
             this.cadena = this.cadena.substring(j + 1, this.cadena.length());
             String contenido = obtencionDeContenido(this.cadena);
             try {
