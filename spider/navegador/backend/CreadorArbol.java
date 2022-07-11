@@ -1,6 +1,7 @@
 package spider.navegador.backend;
 
 import spider.navegador.arbolHTML.*;
+
 public class CreadorArbol {
   private EtiquetaRama raiz;
   private String cadena;
@@ -12,33 +13,50 @@ public class CreadorArbol {
   public EtiquetaHTML crearDOM(String mensajeIn) {
     this.cadena = mensajeIn;
     generarArbol(cadena);
-    EtiquetaRama eti = new EtiquetaRama(EtiquetaEnum.H1);
-
-    return eti;
+    return raiz;
   }
 
   private void generarArbol(String cadena) {
     this.cadena = cadena;
-    generarArbol(cadena, raiz);
+    generarArbol(raiz);
   }
 
-  private void generarArbol(String cadena, EtiquetaHTML nodo) {
-    String res = "";
+  private void generarArbol(EtiquetaRama nodo) {
+    for (int i = 0; i < this.cadena.length(); i++) {
+      if (this.cadena.charAt(i) == '<') {
+        for (int j = 0; j < this.cadena.length(); j++) {
+          if (this.cadena.charAt(j) == '>') {
+            String padre = this.cadena.substring(i + 1, j);
+            this.cadena = this.cadena.substring(j + 1, this.cadena.length());
+            String contenido = obtencionDeContenido(this.cadena);
+            try {
+              EtiquetaEnum convertir = EtiquetaEnum.valueOf(padre);
+              if (!contenido.equals("\n")) {
+                EtiquetaHoja hijoFinal = new EtiquetaHoja(convertir, contenido);
+                nodo.insertarHijo(hijoFinal);
+                eliminarTagSalida();
+              } else {
+                EtiquetaRama hijo = new EtiquetaRama(convertir);
+                nodo.insertarHijo(hijo);
+                crearHijos(hijo, convertir);
+              }
+              i = this.cadena.length();
+              break;
+            } catch (Exception e) {
+              System.out.println("Etiqueta no valida, no se mostrara el contenido");
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private void eliminarTagSalida() {
     for (int i = 0; i < cadena.length(); i++) {
-      if (cadena.charAt(i) == '<') {
+      if (cadena.charAt(i) == '<' && cadena.charAt(i + 1) == '/') {
         for (int j = 0; j < cadena.length(); j++) {
           if (cadena.charAt(j) == '>') {
-            String padre = cadena.substring(i + 1, j);
             this.cadena = cadena.substring(j + 1, cadena.length());
-            String contenido = obtencionDeContenido(this.cadena);
-            /*Nodo hijo = new Nodo(padre, contenido);
-            nodo.agregarHijo(hijo); */
-            if (contenido != "") {
-              EtiquetaHTML hijo = new EtiquetaRama(EtiquetaEnum.A);
-              crearHijos(hijo, EtiquetaEnum.H1);
-            } else {
-              EtiquetaHTML hijoFinal = new EtiquetaHoja(EtiquetaEnum.H2, contenido);
-            }
             i = cadena.length();
             break;
           }
@@ -47,7 +65,8 @@ public class CreadorArbol {
     }
   }
 
-  private boolean crearHijos(EtiquetaHTML nodoPadre1, EtiquetaEnum tipo) {
+  //algo esta haciendo mal en aqui. no sacamos todos los hijo hoja.
+  private boolean crearHijos(EtiquetaRama nodoPadre1, EtiquetaEnum tipo) {
     boolean termino = false;
     for (int i = 0; i < cadena.length(); i++) {
       if (cadena.charAt(i) == '<' && cadena.charAt(i + 1) == '/') {
@@ -55,7 +74,7 @@ public class CreadorArbol {
           if (cadena.charAt(j) == '>') {
             try {
               String padreDe = cadena.substring(i + 2, j);
-              //para entrar y romper el ciclo.
+              //System.out.println(tipo.name() + "Pabre de :" + padreDe);
               if (tipo.name().equals(padreDe)) {
                 i = cadena.length();
                 cadena = cadena.substring(j + 1, cadena.length());
@@ -68,7 +87,7 @@ public class CreadorArbol {
         }
       } else {
         if (cadena.charAt(i) == '<' && cadena.charAt(i + 1) != '/') {
-          generarArbol(cadena, nodoPadre1);
+          generarArbol(nodoPadre1);
         }
       }
     }

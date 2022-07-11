@@ -1,8 +1,8 @@
-package spider.navegador;
+package spider.navegador.frontend;
 
+import spider.navegador.Internet;
 import spider.navegador.backend.CreadorArbol;
 import spider.navegador.arbolHTML.EtiquetaHTML;
-import spider.navegador.frontend.BuscadorGUI;
 
 import javax.swing.*;
 import java.io.DataInputStream;

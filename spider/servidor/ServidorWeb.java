@@ -22,10 +22,8 @@ public class ServidorWeb {
   public void iniciar() {
     try {
       ServerSocket skServidor = new ServerSocket(PUERTO);
-      System.out.println("Escucho el puerto " + PUERTO);
-      int n = 5;
-      while (n > 0) {
-        n--;
+      System.out.println("Arrancando el servidor.");
+      while (true) {
         Socket skCliente = skServidor.accept();
         DataInputStream in = new DataInputStream(skCliente.getInputStream());
         DataOutputStream out = new DataOutputStream(skCliente.getOutputStream());
@@ -50,20 +48,18 @@ public class ServidorWeb {
     if (!b) {
       return "400;" + para400;
     }
-    if (true) {
-      recurso = obtenerRecursoHtml(this.nombre, recurso);
-      if (recurso.length() <= 1) {
-        return respuesta;
-      }
-      respuesta = "200;" + recurso;
+    recurso = obtenerRecursoHtml(this.nombre, recurso);
+    if (recurso.length() <= 1) {
+      return respuesta;
     }
+    respuesta = "200;" + recurso;
     return respuesta;
   }
 
   private String obtenerRecursoHtml(String nombre, String recurso) {
     FileReader leer;
     BufferedReader almacenamiento;
-    System.out.println("buscando el recurso:" + nombre + " y " + recurso);
+    System.out.println("buscando el recurso:" + nombre + " y recurso: " + recurso);
     String html = "", informacionSacada = "";
     String pathName = "servidores/" + nombre + "/" + recurso;
     recursosDisponibles = new File(pathName);
@@ -88,7 +84,6 @@ public class ServidorWeb {
 
   public String ejecutarPedido(String pedido) {
     int i = 0;
-    int j = 0;
     String recurso = "";
     String metodo = "";
     try {

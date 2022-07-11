@@ -1,5 +1,7 @@
---> posible problema en el registrar.metodo de intenet.
-
--->
-
+--> Tenemos problemas al crear el arbolHTML.
+    --> En la parte de crear hijos..weno a nivel generar esta pasando algo. Verificar eso.
+--> Debemos ver como hacer para crear componentes y eso enviar al gui
+    --> Por ahora sabemos que el JCompent es una interfaz, entonces eso podremos usar para mandar.
+--> Obtener todo el texto para que se imprima o renderize por consola.
+    --> Vamos a obtener del arbol de html, para que el texto este en uno.
 -->

@@ -18,12 +18,14 @@ public class EtiquetaHoja implements EtiquetaHTML {
 
   @Override
   public JComponent graficar() {
-    return null;
+    JLabel label = new JLabel();
+    label.setText(toString());
+    return label;
   }
 
   @Override
   public String desplegar() {
-    return null;
+    return contenido;
   }
 
 }

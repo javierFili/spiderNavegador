@@ -1,6 +1,5 @@
 package spider.navegador.frontend;
 
-import spider.navegador.NavegadorWeb;
 import spider.navegador.arbolHTML.EtiquetaHTML;
 import spider.navegador.backend.CreadorArbol;
 
@@ -9,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BuscadorGUI extends JFrame {
-  private JTextArea documentoShow;
+  private JLabel documentoShow;
   private JTextField datosDeEntrada;
   private JButton botonDeBuscador;
   private JPanel panel1;
