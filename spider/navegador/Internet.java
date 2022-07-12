@@ -41,14 +41,14 @@ public class Internet {
   }
 
   public String resolverNombre(String nombre) throws ServerNameNotFound {
-    String serviNombre = "";
+    String nombreServer = "";
     for (int i = 0; i < dns.size(); i++) {
-      serviNombre = (String) dns.get(i);
-      int pos = serviNombre.indexOf(';');
-      String servi = serviNombre.substring(0, pos);
+      nombreServer = (String) dns.get(i);
+      int pos = nombreServer.indexOf(';');
+      String servi = nombreServer.substring(0, pos);
       if (servi.equals(nombre)) {
-        int posDos = serviNombre.indexOf(';');
-        String ip = serviNombre.substring(posDos + 1, serviNombre.length());
+        int posDos = nombreServer.indexOf(';');
+        String ip = nombreServer.substring(posDos + 1, nombreServer.length());
         return ip;
       }
     }

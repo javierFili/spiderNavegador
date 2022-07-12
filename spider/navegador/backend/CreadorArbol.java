@@ -35,7 +35,7 @@ public class CreadorArbol {
             String contenido = obtencionDeContenido(this.cadena);
             try {
               EtiquetaEnum convertir = EtiquetaEnum.valueOf(padre);
-              if (!contenido.equals("\n")) {
+              if (!contenido.equals("\n") && !contenido.equals("")) {
                 EtiquetaHoja hijoFinal = new EtiquetaHoja(convertir, contenido);
                 nodo.insertarHijo(hijoFinal);
                 eliminarTagSalida();
@@ -69,7 +69,6 @@ public class CreadorArbol {
     }
   }
 
-  //algo esta haciendo mal en aqui. no sacamos todos los hijo hoja.
   private boolean crearHijos(EtiquetaRama nodoPadre1, EtiquetaEnum tipo) {
     boolean termino = false;
     for (int i = 0; i < cadena.length(); i++) {

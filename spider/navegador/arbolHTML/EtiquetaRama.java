@@ -19,12 +19,23 @@ public class EtiquetaRama implements EtiquetaHTML {
 
   @Override
   public JComponent graficar() {
-    JLabel label = new JLabel();
-    String cadenaTexto = toString();
-    label.setToolTipText(cadenaTexto);
-    return label;
+    ElementoGrafico creadorElementoGrafico = new ElementoGrafico();
+    JPanel jPanel = (JPanel) creadorElementoGrafico.crearElementoGraficoSinContenido(tipo);
+    for (EtiquetaHTML etiquetaHTML : hijos) {
+      JComponent nuevo = etiquetaHTML.graficar();
+      anadirNuevaEtiquetaAUnPanel(jPanel, nuevo);
+    }
+    return jPanel;
   }
 
+  private void anadirNuevaEtiquetaAUnPanel(JPanel panel, JComponent nuevaEtiqueta) {
+    int posYpanel = panel.getHeight();
+    int anchoPanel = panel.getWidth();
+    int tamanioNuevaEtiqueta = nuevaEtiqueta.getHeight();
+    panel.setSize(anchoPanel, posYpanel + tamanioNuevaEtiqueta + 5);
+    nuevaEtiqueta.setLocation(5, posYpanel + 5);
+    panel.add(nuevaEtiqueta);
+  }
 
   @Override
   public String desplegar() {
@@ -41,7 +52,7 @@ public class EtiquetaRama implements EtiquetaHTML {
       if (hijos.get(i) instanceof EtiquetaHoja) {
         contenido += "\n" + hijos.get(i).toString();
       } else {
-        contenido += "\n    " + hijos.get(i).toString();
+        contenido += "\n\t" + hijos.get(i).toString();
       }
     }
     return contenido;

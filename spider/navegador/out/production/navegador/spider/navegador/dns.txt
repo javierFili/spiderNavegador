@@ -3,3 +3,5 @@ www.fcyt.umss.edu.bo;localhost
 www.cs.umss.edu.bo;25.69.163.100
 www.javierfiligrana.as;localhost
 www.mauriciohuayta.as;25.69.163.100
+www.pablomaguina.as;localhost
+www.danielabravo.as;localhost
