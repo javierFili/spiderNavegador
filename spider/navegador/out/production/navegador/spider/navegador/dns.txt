@@ -5,3 +5,4 @@ www.javierfiligrana.as;localhost
 www.mauriciohuayta.as;25.69.163.100
 www.pablomaguina.as;localhost
 www.danielabravo.as;localhost
+www.dilanantezana.as;localhost

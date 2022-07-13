@@ -7,14 +7,12 @@ import java.util.List;
 public class EtiquetaRama implements EtiquetaHTML {
   private EtiquetaEnum tipo;
   private List<EtiquetaHTML> hijos;
-  private List<JLabel> hojas;
   private String texto = "";
 
   public EtiquetaRama(EtiquetaEnum etiqueta) {
     super();
     this.tipo = etiqueta;
     hijos = new ArrayList<>();
-    hojas = new ArrayList<>();
   }
 
   @Override

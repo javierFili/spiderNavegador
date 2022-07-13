@@ -25,22 +25,21 @@ public class NavegadorWeb {
       int firstCut = url.indexOf(";");
       String server = url.substring(0, firstCut);
       String ip = internet.resolverNombre(server);
-      if (ip != null) {
-        Socket skCliente = new Socket(ip, 8080);
-        DataInputStream in = new DataInputStream(skCliente.getInputStream());
-        DataOutputStream out = new DataOutputStream(skCliente.getOutputStream());
-        String[] partirTraduccion = url.split(";");
-        String recursoPartido = "index.html";
-        if (partirTraduccion.length > 1) {
-          recursoPartido = partirTraduccion[1];
-        }
-        out.writeUTF("GET" + ";" + recursoPartido);
-        String result = in.readUTF();
-        String[] partesRespuesta = result.split(";", 2);
-        String codigo = partesRespuesta[0];
-        recurso = partesRespuesta[1];
-        skCliente.close();
+      Socket skCliente = new Socket(ip, 8080);
+      DataInputStream in = new DataInputStream(skCliente.getInputStream());
+      DataOutputStream out = new DataOutputStream(skCliente.getOutputStream());
+      String[] partirTraduccion = url.split(";");
+      String recursoPartido = "index.html";
+      if (partirTraduccion.length > 1) {
+        recursoPartido = partirTraduccion[1];
       }
+      out.writeUTF("GET" + ";" + recursoPartido);
+      String result = in.readUTF();
+      String[] partesRespuesta = result.split(";", 2);
+      String codigo = partesRespuesta[0];
+      recurso = partesRespuesta[1];
+      skCliente.close();
+
 
     } catch (Exception e) {
       System.out.println(e);
@@ -51,6 +50,6 @@ public class NavegadorWeb {
   }
 
   public void run() {
-    BuscadorGUI gui = new BuscadorGUI(internet,nav);
+    BuscadorGUI gui = new BuscadorGUI(internet, nav);
   }
 }

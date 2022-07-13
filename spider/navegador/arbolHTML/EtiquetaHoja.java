@@ -18,18 +18,10 @@ public class EtiquetaHoja implements EtiquetaHTML {
 
   @Override
   public JComponent graficar() {
-    /*JLabel label = new JLabel();
-    label.setText(toString());*/
     ElementoGrafico creador = new ElementoGrafico();
     return creador.crearElementoGraficoConContenido(tipo, contenido);
   }
 
-  /*@Override
-  public JComponent graficar() {
-    ElementoGrafico creadorElementoGrafico = new ElementoGrafico();
-    JPanel jPanel = (JPanel) creadorElementoGrafico.crearElementoGraficoConContenido(tipo, contenido);
-    return jPanel;
-  }*/
   @Override
   public String desplegar() {
     return contenido;
