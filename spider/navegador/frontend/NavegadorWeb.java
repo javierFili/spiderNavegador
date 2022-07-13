@@ -17,9 +17,9 @@ public class NavegadorWeb {
   }
 
   public String ejecutarPedido(String url) {
-    String recurso = "<HTML><H1>CODIGO 500 </H1><H2>Server error</H2></HTML>";
+    String recurso = "<HTML> <H1>CODIGO 500 </H1> <H2>Server error</H2></HTML>";
     if (!url.contains(";")) {
-      return "400;<HTML><H1> CODIGO 400 </H1><H2>Bad Request</H2></HTML>";
+      return "400;<HTML> <H1> CODIGO 400 </H1> <H2>Bad Request</H2></HTML>";
     }
     try {
       int firstCut = url.indexOf(";");
@@ -50,6 +50,6 @@ public class NavegadorWeb {
   }
 
   public void run() {
-    BuscadorGUI gui = new BuscadorGUI(internet, nav);
+    BuscadorGUI gui = new BuscadorGUI(nav);
   }
 }

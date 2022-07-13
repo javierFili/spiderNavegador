@@ -14,13 +14,12 @@ public class CreadorArbol {
 
   public EtiquetaHTML crearDOM(String mensajeIn) {
     this.cadena = mensajeIn;
-    cadena = cadena.replaceAll("\\t", "");
     generarArbol(cadena);
     return raiz;
   }
 
-  private void generarArbol(String cadena) {
-    this.cadena = cadena;
+  private void generarArbol(String cad) {
+    this.cadena = cad;
     generarArbol(raiz);
   }
 
@@ -33,7 +32,7 @@ public class CreadorArbol {
   }
 
   private int detenerminarFinTag(EtiquetaRama nodo, int i) {
-    for (int j = 0; j < this.cadena.length(); j++) {
+    for (int j = i; j < this.cadena.length(); j++) {
       if (this.cadena.charAt(j) == '>' || this.cadena.charAt(j) == ' ') {
         String padre = this.cadena.substring(i + 1, j);
         if (this.cadena.charAt(j) == ' ') {
@@ -52,7 +51,7 @@ public class CreadorArbol {
   }
 
   private void seleccionarHojaRama(EtiquetaRama nodo, String contenido, EtiquetaEnum convertir) {
-    if (!contenido.equals("\n") && !contenido.equals("")) {
+    if (!contenido.equals("\n") && !contenido.isBlank()) {
       EtiquetaHoja hijoFinal = new EtiquetaHoja(convertir, contenido);
       nodo.insertarHijo(hijoFinal);
       eliminarTagSalida();

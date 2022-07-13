@@ -13,12 +13,10 @@ import spider.navegador.backend.CreadorArbol;
 public class BuscadorGUI extends JFrame {
   private JPanel contenidoNavegador;
   private JTextField textoEntrada;
-  private final Internet internet;
 
   private NavegadorWeb navegadorWeb;
 
-  public BuscadorGUI(Internet internet, NavegadorWeb nav) {
-    this.internet = internet;
+  public BuscadorGUI( NavegadorWeb nav) {
     this.navegadorWeb = nav;
     initWindow();
   }
@@ -36,6 +34,7 @@ public class BuscadorGUI extends JFrame {
     contenidoNavegador.setBounds(0, 0, 1280, 2000);
     String pedido = textoEntrada.getText();
     String recursoHTML = navegadorWeb.ejecutarPedido(pedido);
+    recursoHTML = recursoHTML.replaceAll("\r", "");
     desplegar(recursoHTML);
     add(contenidoNavegador);
     repaint();
@@ -49,7 +48,7 @@ public class BuscadorGUI extends JFrame {
     contenidoNavegador.setBounds(0, 0, 1280, 10000);
     String pedido = textoEntrada.getText();
     String servidor = pedido.split(";")[0];
-    NavegadorWeb servicio = new NavegadorWeb(internet);
+    NavegadorWeb servicio = navegadorWeb;
     String recursoHTML = servicio.ejecutarPedido(servidor + ";" + command);
     desplegar(recursoHTML);
     add(contenidoNavegador);

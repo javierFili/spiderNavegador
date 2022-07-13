@@ -6,3 +6,6 @@ www.mauriciohuayta.as;25.69.163.100
 www.pablomaguina.as;localhost
 www.danielabravo.as;localhost
 www.dilanantezana.as;localhost
+www.garyantezana.as;25.67.252.105
+www.mauriciovargas.as;25.59.201.63
+www.karenmontano.as;25.65.141.150
