@@ -50,14 +50,15 @@ public class CreadorArbol {
     return i;
   }
 
-  private void seleccionarHojaRama(EtiquetaRama nodo, String contenido, EtiquetaEnum convertir) {
+  private boolean seleccionarHojaRama(EtiquetaRama nodo, String contenido, EtiquetaEnum convertir) {
     if (!contenido.equals("\n") && !contenido.isBlank()) {
       EtiquetaHoja hijoFinal = new EtiquetaHoja(convertir, contenido);
       nodo.insertarHijo(hijoFinal);
       eliminarTagSalida();
-    } else {
-      inserccionHoja(nodo, convertir);
+      return false;
     }
+    inserccionHoja(nodo, convertir);
+    return true;
   }
 
   private void inserccionHoja(EtiquetaRama nodo, EtiquetaEnum convertir) {
