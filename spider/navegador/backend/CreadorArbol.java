@@ -56,10 +56,14 @@ public class CreadorArbol {
       nodo.insertarHijo(hijoFinal);
       eliminarTagSalida();
     } else {
-      EtiquetaRama hijo = new EtiquetaRama(convertir);
-      nodo.insertarHijo(hijo);
-      crearHijos(hijo, convertir);
+      inserccionHoja(nodo, convertir);
     }
+  }
+
+  private void inserccionHoja(EtiquetaRama nodo, EtiquetaEnum convertir) {
+    EtiquetaRama hijo = new EtiquetaRama(convertir);
+    nodo.insertarHijo(hijo);
+    crearHijos(hijo, convertir);
   }
 
   private void eliminarTagSalida() {
@@ -89,11 +93,11 @@ public class CreadorArbol {
 
   private int hijoPadre(EtiquetaRama nodoPadre1, EtiquetaEnum tipo, int i) {
     String cadenaEspera = cadena;
+    i = creaPadre(nodoPadre1, i);
     if (cadena.charAt(i) == '<' && cadena.charAt(i + 1) == '/') {
+      cadena = cadenaEspera;
       i = creadorHijos.creaHijo(tipo, i, this.cadena);
       cadena = creadorHijos.actualizarCadena();
-    } else {
-      i = creaPadre(nodoPadre1, i);
     }
     return i;
   }
