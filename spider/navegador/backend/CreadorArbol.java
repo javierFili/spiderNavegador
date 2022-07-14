@@ -2,6 +2,8 @@ package spider.navegador.backend;
 
 import spider.navegador.arbolHTML.*;
 
+import java.awt.*;
+
 public class CreadorArbol {
   private EtiquetaRama raiz;
   private String cadena;
@@ -12,25 +14,21 @@ public class CreadorArbol {
     creadorHijos = new CreadorHijo();
   }
 
-  public EtiquetaHTML crearDOM(String mensajeIn) {
-    this.cadena = mensajeIn;
-    generarArbol(cadena);
-    return raiz;
-  }
-
-  private void generarArbol(String cad) {
-    this.cadena = cad;
-    generarArbol(raiz);
-  }
-
   private void generarArbol(EtiquetaRama nodo) {
     for (int i = 0; i < this.cadena.length(); i++) {
-      if (this.cadena.charAt(i) == '<') {
-        i = detenerminarFinTag(nodo, i);
-      }
+      boolean crear = this.cadena.charAt(i) == '<';
+      i = condicionDeCreacion(crear, i, nodo);
     }
   }
 
+  private int condicionDeCreacion(boolean crear, int i, EtiquetaRama nodo) {
+    if (crear) {
+      i = detenerminarFinTag(nodo, i);
+    }
+    return i;
+  }
+
+  //** para elimiar esas anidaciones.
   private int detenerminarFinTag(EtiquetaRama nodo, int i) {
     for (int j = i; j < this.cadena.length(); j++) {
       if (this.cadena.charAt(j) == '>' || this.cadena.charAt(j) == ' ') {
@@ -50,6 +48,54 @@ public class CreadorArbol {
     return i;
   }
 
+  //*
+  private void eliminarTagSalida() {
+    for (int i = 0; i < cadena.length(); i++) {
+      boolean inicioDeCierre = cadena.charAt(i) == '<' && cadena.charAt(i + 1) == '/';
+      i = condicionDeCierre(inicioDeCierre, i);
+    }
+  }
+
+  private int condicionDeCierre(boolean condicion, int i) {
+    if (condicion) {
+      i = buscarCierre(i);
+    }
+    return i;
+  }
+
+
+  private int buscarCierre(int i) {
+    for (int j = 0; j < cadena.length(); j++) {
+      Point valores = condicionDeCierreCorte(j);
+      i = valores.x;
+      j = valores.y;
+    }
+    return i;
+  }
+
+  private Point condicionDeCierreCorte(int j) {
+    Point p = new Point(0, j);
+    if (cadena.charAt(j) == '>') {
+      this.cadena = cadena.substring(j + 1, cadena.length());
+      p.x = cadena.length();
+      p.y = cadena.length();
+    }
+    return p;
+  }
+
+
+  public EtiquetaHTML crearDOM(String mensajeIn) {
+    this.cadena = mensajeIn;
+    generarArbol(cadena);
+    return raiz;
+  }
+
+  private void generarArbol(String cad) {
+    this.cadena = cad;
+    generarArbol(raiz);
+  }
+
+
   private boolean seleccionarHojaRama(EtiquetaRama nodo, String contenido, EtiquetaEnum convertir) {
     if (!contenido.equals("\n") && !contenido.isBlank()) {
       EtiquetaHoja hijoFinal = new EtiquetaHoja(convertir, contenido);
@@ -67,24 +113,6 @@ public class CreadorArbol {
     crearHijos(hijo, convertir);
   }
 
-  private void eliminarTagSalida() {
-    for (int i = 0; i < cadena.length(); i++) {
-      if (cadena.charAt(i) == '<' && cadena.charAt(i + 1) == '/') {
-        i = buscarCierre(i);
-      }
-    }
-  }
-
-  private int buscarCierre(int i) {
-    for (int j = 0; j < cadena.length(); j++) {
-      if (cadena.charAt(j) == '>') {
-        this.cadena = cadena.substring(j + 1, cadena.length());
-        i = cadena.length();
-        break;
-      }
-    }
-    return i;
-  }
 
   private void crearHijos(EtiquetaRama nodoPadre1, EtiquetaEnum tipo) {
     for (int i = 0; i < cadena.length(); i++) {
