@@ -88,6 +88,7 @@ public class CreadorArbol {
   }
 
   private int hijoPadre(EtiquetaRama nodoPadre1, EtiquetaEnum tipo, int i) {
+    String cadenaEspera = cadena;
     if (cadena.charAt(i) == '<' && cadena.charAt(i + 1) == '/') {
       i = creadorHijos.creaHijo(tipo, i, this.cadena);
       cadena = creadorHijos.actualizarCadena();

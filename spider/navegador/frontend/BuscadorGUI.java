@@ -13,7 +13,6 @@ import spider.navegador.backend.CreadorArbol;
 public class BuscadorGUI extends JFrame {
   private JPanel contenidoNavegador;
   private JTextField textoEntrada;
-
   private NavegadorWeb navegadorWeb;
 
   public BuscadorGUI( NavegadorWeb nav) {
